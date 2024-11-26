@@ -71,10 +71,26 @@ class DoublyLinkedList:
         self.length=-1         
         return temp.value, "poped value"
     
+    def get(self, index):
+        if index <  0 or index  >= self.length:
+            return None
+        
+        temp = self.head
+        if self.length /2 > index:
+            for _ in range(index):
+                temp = temp.next
+        else:
+            temp = self.tail
+            for _ in range(self.length - 1,index,  -1):
+                temp = temp.prev
+        
+        return temp.value
+        
+    
           
     def display(self):
         temp = self.head
-        while temp is not None:
+        while temp.next is not None:
             print(temp.value, end="->")
             temp = temp.next
         
@@ -83,18 +99,19 @@ class DoublyLinkedList:
 
 d1 = DoublyLinkedList(4)
 d1.append(49) 
-d1.append(50)
-d1.append(509)
-d1.append(5094)
 d1.prepend(55)
-
-
-# print(d1.pop())
-# print(d1.pop())
-
-# print(d1.pop())
 d1.prepend(400)
-d1.pop_first()
-d1.display()
+
+
+
+# print(d1.pop())
+# print(d1.pop())
+
+# print(d1.pop())
+# d1.pop_first()
+print(d1.get(1))
+print(d1.get(2))
+print(d1.get(0))
+
 
 
