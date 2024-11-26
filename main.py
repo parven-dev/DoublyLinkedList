@@ -31,20 +31,35 @@ class DoublyLinkedList:
     def pop(self):
         if self.length == 0:
             return None
+        
         temp = self.tail
-        self.tail = self.tail.prev
-        self.tail.next = None
-        temp.prev = None
+        if self.length == 1:
+            self.head = None
+            self.tail = None
+        else:  
+            self.tail = self.tail.prev
+            self.tail.next = None
+            temp.prev = None
         
         self.length -= 1
+        return temp.value, "poped noded"
 
-        print("poped item", temp.value)
+    def prepend(self, value):
+        new_node = Node(value)
+        if self.length == 0:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            new_node.next = self.head
+            self.head.prev = new_node
+            self.head = new_node
+        self.length +=1 
+        return True
         
-        
-        
-        
-    
-            
+      
+             
+
+          
     def display(self):
         temp = self.head
         while temp is not None:
@@ -55,9 +70,17 @@ class DoublyLinkedList:
 
 
 d1 = DoublyLinkedList(4)
-d1.append(49)
+d1.append(49) 
 d1.append(50)
 d1.append(509)
+d1.append(5094)
+d1.prepend(55)
 
-d1.pop()
+
+# print(d1.pop())
+# print(d1.pop())
+
+# print(d1.pop())
+d1.prepend(400)
+
 d1.display()
