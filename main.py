@@ -55,15 +55,27 @@ class DoublyLinkedList:
             self.head = new_node
         self.length +=1 
         return True
+    
+    def pop_first(self):
+        temp = self.head 
         
-      
-             
-
+        if self.length == 0:
+            return None
+        if self.length == 1:
+            self.head = None
+            self.tail = None
+        else:
+            self.head = self.head.next
+            self.prev  = None 
+            temp.next = None  
+        self.length=-1         
+        return temp.value, "poped value"
+    
           
     def display(self):
         temp = self.head
         while temp is not None:
-            print(temp.value)
+            print(temp.value, end="->")
             temp = temp.next
         
             
@@ -82,5 +94,7 @@ d1.prepend(55)
 
 # print(d1.pop())
 d1.prepend(400)
-
+d1.pop_first()
 d1.display()
+
+
