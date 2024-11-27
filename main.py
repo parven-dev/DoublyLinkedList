@@ -20,12 +20,13 @@ class DoublyLinkedList:
         if temp is None:
             self.head = new_node
             self.tail = new_node
-            self.length +=1
             
         else:
             self.tail.next = new_node
             new_node.prev = self.tail
             self.tail = new_node
+        self.length +=1
+
             
             
     def pop(self):
@@ -42,7 +43,7 @@ class DoublyLinkedList:
             temp.prev = None
         
         self.length -= 1
-        return temp.value, "poped noded"
+        return temp
 
     def prepend(self, value):
         new_node = Node(value)
@@ -69,7 +70,7 @@ class DoublyLinkedList:
             self.prev  = None 
             temp.next = None  
         self.length=-1         
-        return temp.value, "poped value"
+        return temp
     
     def get(self, index):
         if index <  0 or index  >= self.length:
@@ -84,23 +85,54 @@ class DoublyLinkedList:
             for _ in range(self.length - 1,index,  -1):
                 temp = temp.prev
         
-        return temp.value
+        return temp
         
     
+    def set_value(self, index, value):
+        
+        temp = self.get(index)
+        if temp:
+            temp.value = value
+        return temp
+        
+    def insert_value(self, index, value):
+        new_node = Node(value)
+        if index < 0 or index > self.length:
+            return False
+    
+        if index == 0:
+            print("index 0")
+            return self.prepend(value)
+        if index == self.length:
+            print("index lenght")
+            return self.append(value)
+            
+        else:
+            print('enter me')
+            before = self.get(index-1)
+            after = before.next
+                
+        new_node.prev = before
+        new_node.next = after 
+        before.next = new_node
+        after.prev = new_node 
+        self.length+=1             
+                
           
     def display(self):
         temp = self.head
         while temp.next is not None:
             print(temp.value, end="->")
             temp = temp.next
-        
             
 
-
 d1 = DoublyLinkedList(4)
-d1.append(49) 
 d1.prepend(55)
 d1.prepend(400)
+d1.append(49) 
+d1.append(50) 
+d1.append(51) 
+
 
 
 
@@ -109,9 +141,11 @@ d1.prepend(400)
 
 # print(d1.pop())
 # d1.pop_first()
-print(d1.get(1))
-print(d1.get(2))
-print(d1.get(0))
-
+# print(d1.get(1))
+# print(d1.get(2))
+# print(d1.get(0))
+print(d1.insert_value(3, 24))
+# print(d1.set_value(1, 33), "i found this value")
+print(d1.display())
 
 
