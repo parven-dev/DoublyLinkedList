@@ -22,18 +22,26 @@ class DLinkedList:
         self.length += 1
         
     def swap(self):
+        
+        
         temp = self.head
-        tail = self.tail
+        for _ in range(self.length-1):
+            if temp == self.head:
+                temp.value = self.tail.value
+                
+            elif temp == self.tail:
+                temp.value = self.head.value
+                
+                
+            
+            print(temp.value)
+            temp = temp.next
+                
+        return temp.value  if temp else None
+     
         
-        
-
-        
-        
-    def display(self):
+    def display(self): 
         temp = self.head
-        tail = self.tail 
-        print("head", temp.value , "tail=", tail.value)
-        print(self.length,"its a length")
         while temp is not None:
             print(temp.value)
             temp = temp.next
@@ -45,5 +53,6 @@ d1.append(2)
 d1.append(4)
 d1.append(5)
 d1.append(6)
+print(d1.swap())
 
-print(d1.display())
+# print(d1.display())
